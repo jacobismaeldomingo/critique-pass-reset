@@ -3,7 +3,7 @@ import { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { confirmPasswordReset } from "firebase/auth";
 import { FaCheckCircle, FaRegEye, FaRegEyeSlash } from "react-icons/fa"; // Importing icons
-import { firebase_auth } from "../../../firebaseConfig";
+import { firebase_auth } from "../../firebaseConfig";
 
 export default function ResetPassword() {
   return (
