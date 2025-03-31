@@ -1,8 +1,9 @@
 "use client";
 import { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
-import { getAuth, confirmPasswordReset } from "firebase/auth";
+import { confirmPasswordReset } from "firebase/auth";
 import { FaCheckCircle, FaRegEye, FaRegEyeSlash } from "react-icons/fa"; // Importing icons
+import { firebase_auth } from "../../../firebaseConfig";
 
 export default function ResetPassword() {
   return (
@@ -45,9 +46,8 @@ function ResetPasswordForm() {
       return;
     }
 
-    const auth = getAuth();
     try {
-      await confirmPasswordReset(auth, oobCode, password);
+      await confirmPasswordReset(firebase_auth, oobCode, password);
       setMessage("Password reset successful! You can now log in.");
     } catch (error) {
       setMessage("Failed to reset password. Please try again.");
@@ -92,12 +92,13 @@ function ResetPasswordForm() {
         textAlign: "center",
       }}
     >
-      <h1 style={{ fontWeight: "bold", fontSize: 24 }}>Reset Password</h1>
+      <h1 style={{ fontWeight: "bold", fontSize: 24, marginBottom: 15 }}>
+        Reset Password
+      </h1>
       {message && (
         <p
           style={{
             color: message.includes("successful") ? "#4CAF50" : "#FF5252",
-            marginTop: 15,
             marginBottom: 20,
           }}
         >
