@@ -1,10 +1,18 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { getAuth, confirmPasswordReset } from "firebase/auth";
 import { FaCheckCircle, FaRegEye, FaRegEyeSlash } from "react-icons/fa"; // Importing icons
 
 export default function ResetPassword() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <ResetPasswordForm />
+    </Suspense>
+  );
+}
+
+function ResetPasswordForm() {
   const searchParams = useSearchParams();
   const [password, setPassword] = useState("");
   const [passwordError, setPasswordError] = useState("");
@@ -88,7 +96,7 @@ export default function ResetPassword() {
       {message && (
         <p
           style={{
-            color: message.includes("successful") ? "green" : "red",
+            color: message.includes("successful") ? "#4CAF50" : "#FF5252",
             marginTop: 15,
             marginBottom: 20,
           }}
@@ -110,7 +118,7 @@ export default function ResetPassword() {
             width: "100%",
             padding: "10px",
             marginBottom: "10px",
-            border: "1px solid #ccc",
+            border: "1px solid #9E9E9E",
             borderRadius: "5px",
           }}
         />
@@ -127,7 +135,7 @@ export default function ResetPassword() {
           {showPassword ? <FaRegEyeSlash size={20} /> : <FaRegEye size={20} />}
         </div>
       </div>
-      {passwordError && <p style={{ color: "red" }}>{passwordError}</p>}
+      {passwordError && <p style={{ color: "#FF5252" }}>{passwordError}</p>}
 
       {/* Password validation icons and messages */}
       {password && (
@@ -144,11 +152,11 @@ export default function ResetPassword() {
         >
           <div style={{ display: "flex", alignItems: "center" }}>
             <FaCheckCircle
-              color={passwordValidation.length ? "green" : "red"}
+              color={passwordValidation.length ? "#4CAF50" : "#FF5252"}
             />
             <span
               style={{
-                color: passwordValidation.length ? "green" : "red",
+                color: passwordValidation.length ? "#4CAF50" : "#FF5252",
                 marginLeft: "10px",
               }}
             >
@@ -157,11 +165,11 @@ export default function ResetPassword() {
           </div>
           <div style={{ display: "flex", alignItems: "center" }}>
             <FaCheckCircle
-              color={passwordValidation.lowercase ? "green" : "red"}
+              color={passwordValidation.lowercase ? "#4CAF50" : "#FF5252"}
             />
             <span
               style={{
-                color: passwordValidation.lowercase ? "green" : "red",
+                color: passwordValidation.lowercase ? "#4CAF50" : "#FF5252",
                 marginLeft: "10px",
               }}
             >
@@ -170,11 +178,11 @@ export default function ResetPassword() {
           </div>
           <div style={{ display: "flex", alignItems: "center" }}>
             <FaCheckCircle
-              color={passwordValidation.uppercase ? "green" : "red"}
+              color={passwordValidation.uppercase ? "#4CAF50" : "#FF5252"}
             />
             <span
               style={{
-                color: passwordValidation.uppercase ? "green" : "red",
+                color: passwordValidation.uppercase ? "#4CAF50" : "#FF5252",
                 marginLeft: "10px",
               }}
             >
@@ -183,11 +191,11 @@ export default function ResetPassword() {
           </div>
           <div style={{ display: "flex", alignItems: "center" }}>
             <FaCheckCircle
-              color={passwordValidation.number ? "green" : "red"}
+              color={passwordValidation.number ? "#4CAF50" : "#FF5252"}
             />
             <span
               style={{
-                color: passwordValidation.number ? "green" : "red",
+                color: passwordValidation.number ? "#4CAF50" : "#FF5252",
                 marginLeft: "10px",
               }}
             >
@@ -196,11 +204,11 @@ export default function ResetPassword() {
           </div>
           <div style={{ display: "flex", alignItems: "center" }}>
             <FaCheckCircle
-              color={passwordValidation.specialChar ? "green" : "red"}
+              color={passwordValidation.specialChar ? "#4CAF50" : "#FF5252"}
             />
             <span
               style={{
-                color: passwordValidation.specialChar ? "green" : "red",
+                color: passwordValidation.specialChar ? "#4CAF50" : "#FF5252",
                 marginLeft: "10px",
               }}
             >
